@@ -8,7 +8,6 @@ public class MovieResults {
 	private int total_results;
 	private int total_pages;
 	private List<MovieResult> results;
-	private int score;
 	
 	public int getTotal_results() {
 		return total_results;
@@ -42,7 +41,5 @@ public class MovieResults {
 		}
 	}
 	
-	public int getScore() {
-		return score;
-	}
+	
 }

@@ -1,4 +1,5 @@
 package com.ambientflix.RecEngine;
+import java.util.Comparator;
 
 public class MovieResult {
 
@@ -58,6 +59,7 @@ public class MovieResult {
 	public void updateScore(int weight) {
 		score += weight;
 	}
+	
 	
 	
 }
