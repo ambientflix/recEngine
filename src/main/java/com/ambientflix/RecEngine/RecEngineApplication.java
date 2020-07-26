@@ -84,7 +84,31 @@ public class RecEngineApplication {
 			
 			results.setScore(keywords.getWeight());
 
-			updateRecList(results);			
+			updateRecList(results);		
+			
+		}
+	}
+		
+	
+	/*
+
+	*/
+	public static void checkKeywords(Keywords keywords) {
+		RestTemplate restTemplate2 = new RestTemplate();
+		for (MovieResult movie: recList){
+			int movie_id = movie.getId();
+			MovieResult result = restTemplate2.getForObject("https://api.themoviedb.org/3/movie/{movie_id}?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords", MovieResult.class, Integer.toString(movie_id));
+			System.out.println(result.getMovieKeys().getKeywords());
+			//for(MovieKeyword keyword: result.getMovieKeys().getKeywords()){
+			//	//System.out.println(keyword.getName());
+			//	System.out.println(result.getMovieKeys().getKeywords());
+			//	for(String key: keywords.getkeywords()){
+			//		if(keyword.getName().equals(key)){
+			//			movie.updateScore(1);
+			//		}
+			//		
+			//	}
+			//}
 		}
 	}
 	
@@ -141,14 +165,21 @@ public class RecEngineApplication {
         
         //get movieResults of each keyword in the list
         for (Keywords keywords: values) {
-        	getMovieResults(keywords);
+			getMovieResults(keywords);
         }
-        
+		
+		//check movie to see if their 
+		for(Keywords keywords: values) {
+			checkKeywords(keywords);
+		}
+
+		
         //sort recList and print out recommendations in order
         Collections.sort(recList, new MovieResultComparator());
         for (MovieResult movie: recList) {
         	System.out.println(movie.getTitle());
-        	System.out.println(movie.getScore());
+			System.out.println(movie.getScore());
+			System.out.println(movie.getId());
 
         }
         

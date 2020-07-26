@@ -1,5 +1,6 @@
 package com.ambientflix.RecEngine;
 import java.util.Comparator;
+import java.util.List;
 
 public class MovieResult {
 
@@ -7,6 +8,9 @@ public class MovieResult {
 	private int id, popularity;
 	private float vote_average;
 	private boolean adult;
+	private MovieKeywords keywords;
+	private List<Genre> genres;
+
 	private int score = 0;
 	
 	public String getTitle() {
@@ -51,7 +55,23 @@ public class MovieResult {
 	public void setAdult(boolean adult) {
 		this.adult = adult;
 	}
+
+	public MovieKeywords getMovieKeys(){
+		return keywords;
+	}
 	
+	public void setMovieKeys(MovieKeywords keywords){
+		this.keywords = keywords;
+	}
+
+	public List<Genre> getGenres(){
+		return genres;
+	}
+
+	public void setGenres(List<Genre> genres){
+		this.genres = genres;
+	}
+
 	public int getScore() {
 		return score;
 	}
