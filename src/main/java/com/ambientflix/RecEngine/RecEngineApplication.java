@@ -90,25 +90,43 @@ public class RecEngineApplication {
 	}
 		
 	
-	/*
-
-	*/
+	/**
+	 * Goes through the queried recommendation list one-by-one and uses their ids to request for their specific details in which 
+	 * their own keywords are located. Using these keywords, we see whether they match the keywords from data input.
+	 * If yes, the movie's score is increased.
+	 */ 
 	public static void checkKeywords(Keywords keywords) {
 		RestTemplate restTemplate2 = new RestTemplate();
 		for (MovieResult movie: recList){
 			int movie_id = movie.getId();
-			MovieResult result = restTemplate2.getForObject("https://api.themoviedb.org/3/movie/{movie_id}?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords", MovieResult.class, Integer.toString(movie_id));
-			System.out.println(result.getMovieKeys().getKeywords());
-			//for(MovieKeyword keyword: result.getMovieKeys().getKeywords()){
-			//	//System.out.println(keyword.getName());
-			//	System.out.println(result.getMovieKeys().getKeywords());
-			//	for(String key: keywords.getkeywords()){
-			//		if(keyword.getName().equals(key)){
-			//			movie.updateScore(1);
-			//		}
-			//		
-			//	}
-			//}
+			MovieDetail result = restTemplate2.getForObject("https://api.themoviedb.org/3/movie/{movie_id}?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords", MovieDetail.class, Integer.toString(movie_id));
+			for (MovieKeyword keyword: result.getKeywords().getKeywords()){
+				for (String key: keywords.getkeywords()){
+					if (keyword.getName().equals(key)){
+						movie.updateScore(1);
+					}
+				}
+			}	
+		}
+	}
+
+	/**
+	 * Goes through the queried recommendation list one-by-one and uses their ids to request for their specific details in which
+	 * their individual list of genres is located. Using these genres, we see whether they match the keywords from data input.
+	 * If yes, the movie's score is increased.
+	 */
+	public static void checkGenres(Keywords keywords){
+		RestTemplate restTemplate3 = new RestTemplate();
+		for (MovieResult movie: recList){
+			int movie_id = movie.getId();
+			MovieDetail result = restTemplate3.getForObject("https://api.themoviedb.org/3/movie/{movie_id}?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords", MovieDetail.class, Integer.toString(movie_id));
+			for (Genre genre: result.getGenres()){
+				for (String key: keywords.getkeywords()){
+					if (genre.getName().equals(key)){
+						movie.updateScore(1);
+					}
+				}
+			}
 		}
 	}
 	
@@ -168,12 +186,16 @@ public class RecEngineApplication {
 			getMovieResults(keywords);
         }
 		
-		//check movie to see if their 
+		//check movie to see if their keywords match with the values collected from files
 		for(Keywords keywords: values) {
 			checkKeywords(keywords);
 		}
 
-		
+		//check movie to see if their genres match with the values collected from files
+		for(Keywords keywords: values) {
+			checkGenres(keywords);
+		}
+
         //sort recList and print out recommendations in order
         Collections.sort(recList, new MovieResultComparator());
         for (MovieResult movie: recList) {
