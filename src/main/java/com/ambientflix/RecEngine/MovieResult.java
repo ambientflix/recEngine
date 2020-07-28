@@ -1,6 +1,5 @@
 package com.ambientflix.RecEngine;
-import java.util.Comparator;
-import java.util.List;
+
 
 public class MovieResult {
 

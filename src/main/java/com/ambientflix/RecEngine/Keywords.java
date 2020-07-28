@@ -8,10 +8,16 @@ public class Keywords {
     //String arraylist
     private List<String> keywords = new ArrayList<String>();
     private int weight;
+    private String keywordName;
+    
+    public Keywords(String name, int weight) {
+        setWeight(weight);
+        setName(name);
 
+    }
+    
     public Keywords() {
-        weight = 1;
-
+    	setWeight(1);
     }
 
     public List<String> getkeywords() {
@@ -38,6 +44,14 @@ public class Keywords {
         for (String name : keywords) {
             System.out.println(name);
         }
+    }
+    
+    public void setName(String name) {
+    	keywordName = name;
+    }
+    
+    public String getName() {
+    	return keywordName;
     }
 
 }
