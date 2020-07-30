@@ -28,6 +28,15 @@ public class KeywordServiceImpl implements KeywordsService {
 		
 		Keywords weather = new Keywords("weather", 1);
 		createKeywords(weather);
+		
+		Keywords news = new Keywords("news", 1);
+		createKeywords(news);
+		
+		Keywords genre = new Keywords("genre", 2);
+		createKeywords(genre);
+		
+		Keywords song = new Keywords("song", 1);
+		createKeywords(song);
 
 	}
 	

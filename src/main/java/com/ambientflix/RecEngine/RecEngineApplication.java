@@ -41,29 +41,33 @@ public class RecEngineApplication {
 	 * @return
 	 * @throws IOException
 	 */
-    public static File getFile() throws IOException {
+    public static File getFile(String path) throws IOException {
 
-        Resource resource = resourceLoader.getResource("classpath:static/Twitter.txt");
-//        Resource resource = resourceLoader.getResource(path);
+//        Resource resource = resourceLoader.getResource("classpath:static/Twitter.txt");
+        Resource resource = resourceLoader.getResource(path);
         InputStream dbAsStream = resource.getInputStream();
         return resource.getFile();
     }
 
     public static void writeRecListToFile(List<MovieResult> recList) throws IOException {
 		File outputFile = new File("recList.txt");
+//    	File outputFile = new File(fileName);
 		PrintWriter output = new PrintWriter(outputFile);
 		for (MovieResult movie: recList) {
-	        	System.out.println(movie.getTitle());
-				System.out.println(movie.getScore());
-				System.out.println(movie.getId());
+//	        	System.out.println(movie.getTitle());
+//				System.out.println(movie.getScore());
+//				System.out.println(movie.getId());
 				output.println(movie.getId());
-	        }
+	    }
+		
+		System.out.println("Complete running");
+		
 	        
 	    output.close();
     }
     
-    public static List<Keywords> getKeywordValues() throws IOException {
-    	File wordFile = getFile();
+    public static List<Keywords> getKeywordValues(String path) throws IOException {
+    	File wordFile = getFile(path);
 		
 		//read from files and store all the keywords into a list called values
         Scanner fileScan = new Scanner(wordFile);
@@ -81,11 +85,11 @@ public class RecEngineApplication {
     
     public static void main(String[] args) throws IOException {
 		SpringApplication.run(RecEngineApplication.class, args);
-
+		System.out.println(args[0]);
 		//list of recommendations
 		List<MovieResult> recList = new ArrayList<MovieResult>();
 		
-		List<Keywords> values = getKeywordValues(); //list of all the keywords read from input file
+		List<Keywords> values = getKeywordValues(args[0]); //list of all the keywords read from input file
 		
 		//recommendation generator based on the keywords
 		RecListGenerator generator = new RecListGenerator(values);
