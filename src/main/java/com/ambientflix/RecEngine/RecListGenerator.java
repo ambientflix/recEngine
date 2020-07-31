@@ -110,15 +110,15 @@ public class RecListGenerator {
 	 * their individual list of genres is located. Using these genres, we see whether they match the keywords from data input.
 	 * If yes, the movie's score is increased.
 	 */
-	public void checkGenres(Keywords keywords){
+	public void checkGenres(Keywords genres){
 		RestTemplate restTemplate3 = new RestTemplate();
 		for (MovieResult movie: recList){
 			int movie_id = movie.getId();
 			MovieDetail result = restTemplate3.getForObject("https://api.themoviedb.org/3/movie/{movie_id}?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords", MovieDetail.class, Integer.toString(movie_id));
 			for (Genre genre: result.getGenres()){
-				for (String key: keywords.getkeywords()){
+				for (String key: genres.getkeywords()){
 					if (genre.getName().equals(key)){
-						movie.updateScore(1);
+						movie.updateScore(genres.getWeight());
 					}
 				}
 			}

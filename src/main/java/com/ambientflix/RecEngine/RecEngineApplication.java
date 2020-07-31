@@ -20,6 +20,8 @@ import java.util.Scanner;
 import java.io.File;  
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.json.JSONException;
+
 
 
 @SpringBootApplication
@@ -83,22 +85,24 @@ public class RecEngineApplication {
         return values;
     }
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, JSONException {
 		SpringApplication.run(RecEngineApplication.class, args);
 		System.out.println(args[0]);
 		//list of recommendations
 		List<MovieResult> recList = new ArrayList<MovieResult>();
 		
-		List<Keywords> values = getKeywordValues(args[0]); //list of all the keywords read from input file
+//		List<Keywords> values = getKeywordValues(args[0]); //list of all the keywords read from input file
 		
+		Genres genres = new Genres();
+		System.out.println(genres.getGenreId("action"));
 		//recommendation generator based on the keywords
-		RecListGenerator generator = new RecListGenerator(values);
+//		RecListGenerator generator = new RecListGenerator(values);
 		
 		//generate the recommendation list
-		recList = generator.generator();
+//		recList = generator.generator();
 		
 		//write the recommendation list to file
-		writeRecListToFile(recList);
+//		writeRecListToFile(recList);
 		
 //        System.out.println(recList.size());
         
