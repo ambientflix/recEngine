@@ -56,9 +56,9 @@ public class RecEngineApplication {
 //    	File outputFile = new File(fileName);
 		PrintWriter output = new PrintWriter(outputFile);
 		for (MovieResult movie: recList) {
-				output.println(movie.getId());
-//				output.println(movie.getTitle());
-//				output.println(movie.getScore());
+//				output.println(movie.getId());
+				output.println(movie.getTitle());
+				output.println(movie.getScore());
 
 	    }
 		
