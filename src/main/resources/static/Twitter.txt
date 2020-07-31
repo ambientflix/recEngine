@@ -1,14 +1,79 @@
-(tweet)what
-(tweet)is
-(tweet)your
-(tweet)favorite
-(tweet)film
-(tweet)from
-(tweet)the
-(tweet)fabulous
-(tweet)streep
-(tweet)t
-(tweet)of
-(tweet)course
-(tweet)t
-(tweet)pearl
+(tweet)today
+(tweet)main
+(tweet)reason
+(tweet)unemployment
+(tweet)poised
+(tweet)expire
+(tweet)trump
+(tweet)white
+(tweet)house
+(tweet)first
+(tweet)husband
+(tweet)union
+(tweet)wrapped
+(tweet)arms
+(tweet)around
+(tweet)fight
+(tweet)person
+(tweet)fundamental
+(tweet)problem
+(tweet)need
+(tweet)informed
+(name)Mark Hamill
+(name)Alexandria Ocasio-Cortez
+(name)Lin-Manuel Miranda
+(name)Andrew Yang
+(name)Elon Musk
+(name)Pete Buttigieg
+(name)Ken Jeong
+(name)Joe Biden
+(name)Randall Park
+(name)Michael B. Jordan
+(name)Hugh Jackman
+(name)Charlize Theron
+(name)Alison Brie
+(name)Steve Carell
+(name)donald
+(name)Gal Gadot
+(news)limited
+(news)rider
+(news)trips
+(news)arizona
+(news)chief
+(news)executive
+(news)john
+(news)krafcik
+(news)told
+(news)reporters
+(news)weekend
+(news)moment
+(news)fully
+(news)autonomous
+(news)ridesharing
+(news)service
+(news)available
+(location)Phoenix
+(location)Arizona
+(weather)hot
+(weather)Sunny
+(genre)Action
+(name)The Charlie Daniels Band
+(song)The 
+(song)Devil 
+(song)Went 
+(song)Down
+(song)Georgia
+(genre)Western
+(name)Luke Bryan
+(song)Country 
+(song)Girl 
+(song)Shake 
+(song)It 
+(song)For 
+(song)Me
+(genre)Western
+(name)Sam Hunt
+(song)Make 
+(song)You 
+(song)Miss 
+(song)Me

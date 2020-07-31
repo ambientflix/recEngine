@@ -74,9 +74,9 @@ public class KeywordServiceImpl implements KeywordsService {
         		System.out.println("Can't find type");
         	}
         	
-        	if (keywordsLookupTable.keySet().contains(type)) {
+        	if (keywordsLookupTable.keySet().contains(type.toLowerCase())) {
         		if (!word.equals("")) {
-                	updateKeywords(type, word);
+                	updateKeywords(type, word.toLowerCase());
         		}
         	}
         
