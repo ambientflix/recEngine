@@ -82,13 +82,17 @@ public class RecListGenerator  {
 			if (keywords.getName().equals("genre")) {
 				String genreId = Integer.toString(genres.getGenreId(keyword.toLowerCase()));
 				results = restTemplate.getForObject("http://api.themoviedb.org/3/genre/"+genreId+"/movies?api_key=9950b15cd666adb852b2ea54472b7c38&query", MovieResults.class);		
+				
 			} else {
 				//get movies by querying words
 				results = restTemplate.getForObject("https://api.themoviedb.org/3/search/movie?api_key=9950b15cd666adb852b2ea54472b7c38&query="+query, MovieResults.class);		
 			}
-			results.setScore(keywords.getWeight());
-
-			updateRecList(results);	
+			
+			if (!results.equals(null)) {
+				results.setScore(keywords.getWeight());
+				updateRecList(results);	
+			}
+			
 		}
 	}
 	
@@ -99,26 +103,30 @@ public class RecListGenerator  {
 	 * If yes, the movie's score is increased.
 	 */ 
 	public void checkKeywordsAndGenres (Keywords keywords) throws IOException, JSONException {
-		for (MovieResult movie: recList){
-			
-			MovieDetail movieDetail = new MovieDetail(Integer.toString(movie.getId()));
+		float percent = 0.5f;
+		
+		for (int i = 0; i < recList.size()*percent; i++) {
+			MovieResult movie = recList.get(i);
+			MovieDetail movieDetail = new MovieDetail(Integer.toString(movie.getId()), movie.getTitle());
 			
 			if (keywords.getName().equals("genre")) {
-				for (String key:keywords.getkeywords()) {
-					
-					if (movieDetail.getListOfGenres().contains(key)) {
+				
+				for (String genreName: movieDetail.getListOfGenres()) {
+					if (keywords.getkeywords().contains(genreName)) {
 						movie.updateScore(1);
 					}
 				}
+				
 			} else {
-				for (String key: keywords.getkeywords()) {
-					if (movieDetail.getListOfMovieKeywords().contains(key)) {
+				for (String movieKeywords: movieDetail.getListOfMovieKeywords()) {
+					if (keywords.getkeywords().contains(movieKeywords)) {
 						movie.updateScore(1);
 					}
-					
 				}
+				
 			}
 		}
+			
 	}
 	
 

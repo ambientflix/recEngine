@@ -20,9 +20,11 @@ public class MovieDetail {
 	private String movieID;
 	private String title;
 	private List<String> listOfGenres;
+	private String movieTitle;
 	
-	public MovieDetail(String movieID) throws IOException, JSONException {
+	public MovieDetail(String movieID, String movieTitle) throws IOException, JSONException {
 		this.movieID = movieID;
+		this.movieTitle = movieTitle;
 		jsonService = new JSONService();
 		listOfKeywords = new ArrayList<>();
 		listOfGenres = new ArrayList<>();
@@ -31,27 +33,35 @@ public class MovieDetail {
 	}
 	
 	private void generator() throws IOException, JSONException {
-		JSONObject jo = jsonService.readJsonFromUrl("https://api.themoviedb.org/3/movie/"+movieID+"?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords");
-		
-		//get movie title
-		title = (String) jo.getString("title");
-		
-		//get keywords in movie detail
-		JSONObject keywordsTemp = (JSONObject) jo.get("keywords");
-		JSONArray jsonArray = keywordsTemp.getJSONArray("keywords");
-		
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			listOfKeywords.add(0,(String) jsonObj.get("name"));
+		try {
+			JSONObject jo = jsonService.readJsonFromUrl("https://api.themoviedb.org/3/movie/"+movieID+"?api_key=64a51e683b1854ed324abcdc797de47a&language=en-US&append_to_response=keywords");
+			
+			if (!jo.equals(null)) {
+				//get movie title
+				title = (String) jo.getString("title");
+				
+				//get keywords in movie detail
+				JSONObject keywordsTemp = (JSONObject) jo.get("keywords");
+				JSONArray jsonArray = keywordsTemp.getJSONArray("keywords");
+				
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					listOfKeywords.add(0,(String) jsonObj.get("name"));
+				}
+			
+				
+				//get genres in movie detail
+				jsonArray = jo.getJSONArray("genres");
+				for (int i = 0; i < jsonArray.length(); i++) {
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					listOfGenres.add(0,jsonObj.getString("name").toLowerCase());
+				}
+			}
+			
+		} catch (IOException e) {
+			System.out.println(movieTitle);
 		}
-	
 		
-		//get genres in movie detail
-		jsonArray = jo.getJSONArray("genres");
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObj = jsonArray.getJSONObject(i);
-			listOfGenres.add(0,jsonObj.getString("name").toLowerCase());
-		}
 	}
 	
 	public List<String> getListOfMovieKeywords() {

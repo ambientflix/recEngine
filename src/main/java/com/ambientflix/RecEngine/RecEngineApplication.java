@@ -45,8 +45,8 @@ public class RecEngineApplication {
 	 */
     public static File getFile(String path) throws IOException {
 
-        Resource resource = resourceLoader.getResource("classpath:static/Twitter.txt");
-//        Resource resource = resourceLoader.getResource(path);
+//        Resource resource = resourceLoader.getResource("classpath:static/outputFile.txt");
+        Resource resource = resourceLoader.getResource(path);
         InputStream dbAsStream = resource.getInputStream();
         return resource.getFile();
     }
@@ -89,7 +89,7 @@ public class RecEngineApplication {
 		SpringApplication.run(RecEngineApplication.class, args);
 		RestTemplate restTemplate2 = new RestTemplate();
 		
-				
+		System.out.println(args[0]);
 		//list of recommendations
 		List<MovieResult> recList = new ArrayList<MovieResult>();
 		
