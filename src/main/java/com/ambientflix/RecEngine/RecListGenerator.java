@@ -103,13 +103,19 @@ public class RecListGenerator  {
 			
 			MovieDetail movieDetail = new MovieDetail(Integer.toString(movie.getId()));
 			
-			for (String key: keywords.getkeywords()) {
-				if (movieDetail.getListOfMovieKeywords().contains(key)) {
-					movie.updateScore(1);
+			if (keywords.getName().equals("genre")) {
+				for (String key:keywords.getkeywords()) {
+					
+					if (movieDetail.getListOfGenres().contains(key)) {
+						movie.updateScore(1);
+					}
 				}
-				
-				if (movieDetail.getListOfGenres().contains(key)) {
-					movie.updateScore(1);
+			} else {
+				for (String key: keywords.getkeywords()) {
+					if (movieDetail.getListOfMovieKeywords().contains(key)) {
+						movie.updateScore(1);
+					}
+					
 				}
 			}
 		}
