@@ -45,7 +45,6 @@ public class RecEngineApplication {
 	 */
     public static File getFile(String path) throws IOException {
 
-//        Resource resource = resourceLoader.getResource("classpath:static/outputFile.txt");
         Resource resource = resourceLoader.getResource(path);
         InputStream dbAsStream = resource.getInputStream();
         return resource.getFile();
@@ -53,12 +52,9 @@ public class RecEngineApplication {
 
     public static void writeRecListToFile(List<MovieResult> recList) throws IOException {
 		File outputFile = new File("recList.txt");
-//    	File outputFile = new File(fileName);
 		PrintWriter output = new PrintWriter(outputFile);
 		for (MovieResult movie: recList) {
-//				output.println(movie.getId());
-				output.println(movie.getTitle());
-				output.println(movie.getScore());
+				output.println(movie.getId());
 
 	    }
 		
@@ -105,7 +101,6 @@ public class RecEngineApplication {
 		//write the recommendation list to file
 		writeRecListToFile(recList);
 		
-//        System.out.println(recList.size());
         
         
 	}
